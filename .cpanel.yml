@@ -1,0 +1,17 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/amanexso/public_html/
+    - /bin/cp -r about $DEPLOYPATH
+    - /bin/cp -r assets $DEPLOYPATH
+    - /bin/cp -r contact $DEPLOYPATH
+    - /bin/cp -r hero $DEPLOYPATH
+    - /bin/cp -r og $DEPLOYPATH
+    - /bin/cp -r projects $DEPLOYPATH
+    - /bin/cp -r services $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH
+    - /bin/cp -f index.html $DEPLOYPATH
+    - /bin/cp -f logo.png $DEPLOYPATH
+    - /bin/cp -f og-image.png $DEPLOYPATH
+    - /bin/cp -f robots.txt $DEPLOYPATH
+    - /bin/cp -f sitemap.xml $DEPLOYPATH
