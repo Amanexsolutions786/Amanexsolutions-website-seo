@@ -5,6 +5,7 @@ deployment:
     - /bin/cp -r about $DEPLOYPATH
     - /bin/cp -r assets $DEPLOYPATH
     - /bin/cp -r contact $DEPLOYPATH
+    - /bin/cp -r fonts $DEPLOYPATH
     - /bin/cp -r hero $DEPLOYPATH
     - /bin/cp -r og $DEPLOYPATH
     - /bin/cp -r projects $DEPLOYPATH
