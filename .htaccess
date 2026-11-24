@@ -1,7 +1,31 @@
-# Amanex Solutions — SPA routing for Apache / cPanel hosting
+# Amanex Solutions — routing for Apache / cPanel hosting.
+# Every public route is prerendered to <route>/index.html, so there is no
+# client-side catch-all: unknown URLs get a real 404 (see ErrorDocument below)
+# instead of a 200 copy of the homepage (a "soft 404" / duplicate-content issue).
+ErrorDocument 404 /404.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Leave ACME / AutoSSL validation and other well-known paths alone
+  RewriteRule ^\.well-known/ - [L]
+
+  # Canonical host: www -> apex
+  RewriteCond %{HTTP_HOST} ^www\.amanexsolutions\.com$ [NC]
+  RewriteRule ^(.*)$ https://amanexsolutions.com/$1 [R=301,L]
+
+  # Duplicate homepage URLs -> /
+  RewriteRule ^home/?$ https://amanexsolutions.com/ [R=301,L]
+  # .../index.html requested directly (THE_REQUEST check avoids looping on our
+  # own internal rewrites to index.html)
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ https://amanexsolutions.com/ [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+.+/index\.html[\s?] [NC]
+  RewriteRule ^(.+)/index\.html$ https://amanexsolutions.com/$1 [R=301,L]
+
+  # Canonical URLs have no trailing slash: /services/seo/ -> /services/seo
+  RewriteRule ^(.+)/$ https://amanexsolutions.com/$1 [R=301,L]
 
   # Serve prerendered directory routes (e.g. /services/seo) directly on their
   # canonical, no-trailing-slash URL, before the server's own directory handler
@@ -15,8 +39,7 @@
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Everything else -> index.html (client-side routing)
-  RewriteRule ^ index.html [L]
+  # Everything else falls through to Apache's 404 -> /404.html
 </IfModule>
 
 # Gzip compression
