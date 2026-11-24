@@ -12,6 +12,7 @@ deployment:
     - /bin/cp -r services $DEPLOYPATH
     - /bin/cp -f .htaccess $DEPLOYPATH
     - /bin/cp -f index.html $DEPLOYPATH
+    - /bin/cp -f 404.html $DEPLOYPATH
     - /bin/cp -f logo.png $DEPLOYPATH
     - /bin/cp -f og-image.png $DEPLOYPATH
     - /bin/cp -f favicon.ico $DEPLOYPATH
