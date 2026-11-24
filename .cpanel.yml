@@ -14,5 +14,9 @@ deployment:
     - /bin/cp -f index.html $DEPLOYPATH
     - /bin/cp -f logo.png $DEPLOYPATH
     - /bin/cp -f og-image.png $DEPLOYPATH
+    - /bin/cp -f favicon.ico $DEPLOYPATH
+    - /bin/cp -f icon-192.png $DEPLOYPATH
+    - /bin/cp -f icon-512.png $DEPLOYPATH
+    - /bin/cp -f apple-touch-icon.png $DEPLOYPATH
     - /bin/cp -f robots.txt $DEPLOYPATH
     - /bin/cp -f sitemap.xml $DEPLOYPATH
